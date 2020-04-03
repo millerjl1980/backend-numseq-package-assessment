@@ -1,0 +1,1 @@
+__author__ = "Justin Miller, for is_prime used YouTube (https://youtu.be/2p3kwF04xcA), refactored using demos from 3/18 and 3/19"
