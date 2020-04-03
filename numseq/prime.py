@@ -3,6 +3,21 @@
 #  - `primes(n)`:  Returns a list of all prime numbers less than n
 #  - `is_prime(m)` : Returns a boolean indicating whether `m` is a prime number
 import math
+import cProfile
+import pstats
+import functools
+
+def profile(func):
+    @functools.wraps(func)
+    def inner(*args, **kwargs):
+        p = cProfile.Profile()
+        p.enable()
+        result = func(*args, **kwargs)
+        p.disable()
+        ps = pstats.Stats(p).sort_stats("cumulative")
+        ps.print_stats(10)
+        return result
+    return inner
 
 def is_prime(n):
     """Returns a boolean indicating whether `m` is a prime number"""
@@ -18,6 +33,7 @@ def is_prime(n):
             return False
     return True
 
+@profile
 def primes(n):
     """Returns a list of all prime numbers less than n"""
     primes = []
